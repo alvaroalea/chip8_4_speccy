@@ -13,7 +13,7 @@ en Internet
 Que es Chip8
 ============
 
-Chip8 es un microprocesador virtual de 8 bits de los años 70,
+Chip8 es un microprocesador virtual de 8 bits de los aÃ±os 70,
 con hasta 2Kb de memoria, un area de visualizacion
 de 64x32 pixels en B/N con unos rudimentarios sprites por
 hardware con deteccion de colision.
@@ -24,7 +24,7 @@ de caracteristicas similares de la epoca.
 
 Tiene un bytecode muy sencillo de apenas 40 comandos, todos de 16bits.
 
-En los años 90 volvio a coger fama, debido a la calculadora de 
+En los aÃ±os 90 volvio a coger fama, debido a la calculadora de 
 Hetlew Packard HP48 en la que un emulador de este sistema se utilizo
 para suplir la falta de juegos.
 
@@ -62,11 +62,11 @@ Este Emulador esta publicado con una licencia
 dual, la version basica del emulador esta
 publicado con licencia GPL y es por ello libre.
 
-La version comercial añade soporte para el 
+La version comercial aÃ±ade soporte para el 
 SChip8 y estara disponible contactando con el autor.
 
 Una vez cumplidos los objetivos comerciales que me
-propongo (Un Inves 48K, Un 128K español con teclado numerico y una multiface III)
+propongo (Un Inves 48K, Un 128K espaÃ±ol con teclado numerico y una multiface III)
 la version SChip8 sera tambien liberado con licencia GPL.
 
 

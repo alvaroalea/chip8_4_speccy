@@ -19,7 +19,7 @@ de 64x32 pixels en B/N con unos rudimentarios sprites por
 hardware con deteccion de colision.
 Tambien disponia de un teclado Hexadecimal.
 
-Nunca exisistio y en realidad se emulaba con otros "ordenadores"
+Nunca existio y en realidad se emulaba con otros "ordenadores"
 de caracteristicas similares de la epoca.
 
 Tiene un bytecode muy sencillo de apenas 40 comandos, todos de 16bits.

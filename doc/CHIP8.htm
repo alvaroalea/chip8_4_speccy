@@ -1,0 +1,644 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Generator" content="Microsoft Word 97">
+<title>CHIP8</title></head>
+<body>
+
+<b><font size="7"><p align="center">CHIP8</p>
+</font><font size="6"><p align="center"></p>
+<p align="center">A CHIP-8 / SCHIP emulator</p>
+<p align="center">Version 2.2.0</p>
+<p align="center">By David WINTER (HPMANIAC)</p>
+<p align="center"></p>
+</font></b><font size="4"><p>&nbsp;</p>
+</font><font size="2"><p><img src="CHIP8_files/Image1.gif" height="436" width="600"></p>
+</font><font size="4"><p align="center"></p>
+</font><b><u><font size="6"><p align="center">Contents</p>
+</font></u></b><font size="4">
+<p>&nbsp;</p>
+</font><font size="5"><p>1 - CHIP8 features</p>
+</font><font size="4"></font><dir>
+<dir>
+
+<font size="5"></font><p><font size="5">1.1 - History</font></p>
+<font size="4"><dir>
+<dir>
+
+<p>1.1.1 - The original CHIP-8</p></dir>
+</dir>
+
+<p>1.1.2 - CHIP-8 Today</p>
+<p>1.1.3 - Why a CHIP-8 emulator ?</p>
+</font></dir>
+</dir>
+
+<font size="5"><p>1.2 - Programs and memory</p>
+<p>1.3 - Registers</p>
+<p>1.4 - Graphics</p>
+<p>1.5 - Instructions</p>
+<p>1.6 - Keyboard</p>
+<p>1.7 - CHIP-8/SCHIP games and programs</p>
+</font><font size="4">
+</font><font size="5"><p>&nbsp;</p>
+<p>2 - The CHIP-8 emulator</p>
+</font><font size="4"></font><dir>
+<dir>
+
+<font size="5"></font><p><font size="5">2.1 - CHIP8 configuration</font></p></dir>
+</dir>
+
+<p><font size="5">2.2 - Using CHIP8</font></p>
+<p><font size="5">2.3 - The FIX_CHIP utility</font></p>
+<p><font size="5">2.4 - The UNCHIP disassembler</font></p>
+<p><font size="5">2.5 - The BINHEX and HEXBIN utilities</font></p>
+<p><font size="5">2.6 - The CHIPPER assembler</font></p>
+<font size="4">
+<p>&nbsp;</p>
+</font><font size="5"><p>3 - Contacts</p>
+</font><font size="4">
+<p>&nbsp;</p>
+</font><font size="5"><p>4 - POSTWARE</p>
+</font><font size="4">
+</font><font size="5"><p>1 - CHIP-8 features</p>
+</font><font size="4">
+</font><font size="5"><p>1.1 - History</p>
+</font><font size="4"></font><dir>
+<dir>
+
+<p><font size="4">1.1.1 - The original CHIP-8</font></p>
+</dir>
+</dir>
+
+<p align="justify"><font size="4">CHIP-8 is a language interpreter
+which was used in the late 70's and early 80's on some small commercial
+computers like RCA's TELMAC 1800 and COSMAC VIP, and these El-Cheapo
+"Make-It-Yourself" Hobbyist computers of these times like the ETI 660
+and the DREAM 6800...</font></p>
+<p align="justify"><font size="4">CHIP-8 allowed to program video games
+easily. The TELMAC 1800 and the COSMAC VIP were based on RCA’s CDP-1802
+processor. Both came with an audiocassette containing more than 12
+games, dated 1977 (the complete listings of these programs, as well as
+these of the interpreter and the computer ROM were listed in the
+manuals of the COSMAC and the TELMAC). This interpreter has less than
+40 instructions including arithmetic, control flow, graphics and sound.</font></p>
+<p align="justify"><font size="4">The interpreter had to be very
+compact because of the memory limitation of these machines: the COSMAC
+VIP had 2Kb (although it could be expanded to 32Kb), and the TELMAC had
+4Kb. CHIP-8 was only 512 bytes long.</font></p>
+<p align="justify"><font size="4">The simplicity of this early language
+allowed to program these Pong, Brix, Invaders and Tank games we used to
+see at this early time of the videogame. A good programmer could make
+these games fit into less than 256 bytes.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">Here is a short story about a CHIP-8 user on a DREAM-6800:</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">"...the DREAM and ETI 660 both
+appeared in Australian Electronics Magazines as construction projects.
+What all these computers had in common was that they were disgustingly
+cheap (about $100), used a hex keypad, could produce ultra stingy 64 x
+32 PIXEL (The ETI 660 had 64 x 48 OR 64 x 64 with a modification)
+graphics for display on a TV, had about ONE kilobyte of RAM, and all
+ran a pseudo high-level language called CHIP-8 (which was developed by
+RCA for showing off the COSMAC's graphics, I think).</font></p>
+<p align="justify"><font size="4">...</font></p>
+<p align="justify"><font size="4">Somewhere along the way, my older
+brother made up a DREAM 6800. What a computer! Along with the
+construction articles for the DREAM &amp; ETI 660 were heaps of CHIP-8
+game listings. Some of the games were only 200 BYTES or so, so it
+didn't take forever to type them in. And the games were great fun. They
+weren't slow. And CHIP-8 was pretty much designed for making Classic
+style TV games anyway."</font></p>
+<p align="justify"></p>
+<p align="right"><font size="4">Paul HAYTER (Author of a CHIP-8 interpreter on the Amiga)</font></p>
+
+<p><font size="4">		1.1.2 - CHIP-8 today</font></p>
+
+<p align="justify"><font size="4">CHIP-8 was not only used in the late
+70's and early 80's. It was used in the early 90's on the HP48
+calculator because there was no programming tools to develop fast games
+on it. Most of the original CHIP-8 games work with the CHIP48
+interpreter, and some new ones were programmed. Refer to the section
+1.7 for more details.</font></p>
+<p align="justify"><font size="4">Then, a better version of CHIP-8
+appeared: SUPER-CHIP. This interpreter has all the CHIP-8 features, as
+well as and some new ones like a 128*64 resolution.</font></p>
+<p align="justify"><font size="4">There is a special CHIP-8/SCHIP library on HP48G I programmed, which has more than 40 games.</font></p>
+<p align="justify"><font size="4">This is why there is the FIX_CHIP
+utility, which converts the CHIP-8 games of the HP48 to the PC format.
+Refer to section 2.2 for more informations.</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">		1.1.3 - Why a CHIP-8 emulator ?</font></p>
+
+<p align="justify"><font size="4">A lot of users like emulators,
+because they can replay the games they used to play many years ago. The
+most surprising is that there are lots of games that everyone knows,
+which are not reprogrammed on today's computers.</font></p>
+<p align="justify"><font size="4">Retro gaming was the main reason for
+which I decided to program a CHIP-8 emulator. Moreover, CHIP-8 produces
+games that look like Pong and its variants, and I did not find any
+other emulator, nor computer, producing this kind of games. Note that
+this emulator emulates one of the oldest home computer emulated today.</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<font size="5"><p>	1.2 - CHIP8 programs and memory</p>
+</font><font size="4">
+<p align="justify">All the CHIP-8 programs start at address 200h
+(except those of the ETI-660, which start at the non-standard address
+of 600h). This is due to the interpreter, which used to reside in the
+000h-1FFh area on the Telmac and the COSMAC VIP.</p>
+<p align="justify">The entire memory is accessible and byte
+addressable. As the instructions are 16 bits long, their addresses are
+usually even (if some 8-bit data are inserted into the code, the
+instructions may become odd-addressed).</p>
+<p align="justify">SCHIP programs run like CHIP-8 programs. The only
+differences between them are some new instructions in the SCHIP mode.
+Some of the new instructions work under both CHIP-8 and SCHIP modes.
+Some others work only in SCHIP mode.</p>
+
+</font><font size="5"><p>	1.3 - Registers</p>
+</font><font size="4">
+<b></b></font><p><font size="4"><b>The data registers:</b></font></p><dir>
+<dir>
+
+<p align="justify"><font size="4">They are 16, all 8 bits wide, and
+named V0...VF. VF is used as carry (when using arithmetic instructions)
+and collision detector (when drawing sprites). Refer to the
+instructions section concerning the collisions in SCHIP mode.</font></p>
+</dir>
+</dir>
+
+<font size="4"><b></b></font><p><font size="4"><b>The address register:</b></font></p><dir>
+<dir>
+
+<p align="justify"><font size="4">There is only one named I, 16 bits
+wide. As the memory is 4Kb, the interpreter uses only its 12 low bits.
+The remaining 4 could be set using the LOAD FONT instruction as the
+font was located at address 8110.</font></p>
+</dir>
+</dir>
+
+<font size="4"><b></b></font><p><font size="4"><b>The timers:</b></font></p><dir>
+<dir>
+
+<p align="justify"><font size="4">There are two timers. One is the
+delay timer, and the other the sound timer. Both are 8 bits wide and
+down-count about 60 times per second when non- zero. The speaker will
+beep while the sound timer is non zero. The delay timer is generally
+used to make delay loops.</font></p>
+</dir>
+</dir>
+
+<font size="4"><b></b></font><p><font size="4"><b>The stack:</b></font></p><dir>
+<dir>
+
+<p align="justify"><font size="4">It has 16 levels, allowing 16
+successive subroutine calls. This may not apply to the original CHIP-8
+as no documentation was found on the stack.</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p></dir>
+</dir>
+
+<font size="5"><p>	1.4 - Graphics</p>
+</font><font size="4"></font><p><font size="4"> </font></p>
+<p align="justify"><font size="4">The original resolution of CHIP-8 is
+64 x 32 pixels. Some modified machines could have a 64 x 48 or 64 x 64
+resolution, and the TELMAC also had a second version of CHIP-8 called
+CHIP-82 that used a 64 x 64 resolution. As no program was found using
+the extended ones, CHIP8 will only use the 64 x 32 resolution.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">Graphics are drawn as 8 x 1...15
+sprites (they are byte coded). The origin of the screen is the upper
+left corner. All the coordinates are positive, start at 0, and are
+calculated modulo 64 for X, and 32 for Y when drawing sprites.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">All drawings are done in XOR mode.
+When one or more pixels are erased while a sprite is drawn, the VF
+register is set to 01, otherwise 00.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">CHIP8 has a 4 x 5 pixels hexadecimal font to draw characters. These ones are 0-9 and A-F.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">The SCHIP mode is an extended CHIP-8
+mode. It provides an extended graphic resolution of 128 x 64 pixels.
+When activated, pixels coordinates ranges are 00h-7Fh for X (0-127),
+00h-3Fh for Y (0-63) and are calculated modulo 128 for X and modulo 64
+for Y. It is important to note that a pixel of the 64 x 32 resolution
+will appear twice bigger than one of the extended resolution.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">The SCHIP mode provides an 8 x 10
+decimal character font, and a 16 x 16 sprite. Their drawing modes are
+the same than in CHIP-8. Both of the fonts are usable in 64 x 32 and
+128 x 64 resolutions. Depending on the resolution used, the size of the
+characters will change because of the size of the pixels...</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<font size="5"><p>	1.5 - Instructions</p>
+</font><font size="4">
+</font><p><font size="4">NNN is an address,</font></p>
+<p><font size="4">KK is an 8 bit constant</font></p>
+<p><font size="4">X and Y are two 4 bits constants</font></p>
+
+<p><font size="4">	0NNN	Call 1802 machine code program at NNN (not implemented)</font></p>
+<p><font size="4">	00CN		Scroll down N lines (***)</font></p>
+<p><font size="4">	00FB		Scroll 4 pixels right (***)</font></p>
+<p><font size="4">	00FC		Scroll 4 pixels left (***)</font></p>
+<p><font size="4">	00FD		Quit the emulator (***)</font></p>
+<p><font size="4">	00FE		Set CHIP-8 graphic mode (***)</font></p>
+<p><font size="4">	00FF		Set SCHIP graphic mode (***)</font></p>
+<p><font size="4">	00E0		Erase the screen</font></p>
+<p><font size="4">	00EE		Return from a CHIP-8 sub-routine</font></p>
+<p><font size="4">	1NNN	Jump to NNN</font></p>
+<p><font size="4">	2NNN	Call CHIP-8 sub-routine at NNN (16 successive calls max)</font></p>
+<p><font size="4">	3XKK	Skip next instruction if VX == KK</font></p>
+<p><font size="4">	4XKK	Skip next instruction if VX != KK</font></p>
+<p><font size="4">	5XY0		Skip next instruction if VX == VY</font></p>
+<p><font size="4">	6XKK	VX = KK</font></p>
+<p><font size="4">	7XKK	VX = VX + KK</font></p>
+<p><font size="4">	8XY0		VX = VY</font></p>
+<p><font size="4">	8XY1		VX = VX OR VY</font></p>
+<p><font size="4">	8XY2		VX = VX AND VY</font></p>
+<p><font size="4">	8XY3		VX = VX XOR VY (*)</font></p>
+<p><font size="4">	8XY4		VX = VX + VY, VF = carry</font></p>
+<p><font size="4">	8XY5		VX = VX - VY, VF = not borrow (**)</font></p>
+<p><font size="4">	8XY6		VX = VX SHR 1 (VX=VX/2), VF = carry</font></p>
+<p><font size="4">	8XY7		VX = VY - VX, VF = not borrow (*) (**)</font></p>
+<p><font size="4">	8XYE		VX = VX SHL 1 (VX=VX*2), VF = carry</font></p>
+<p><font size="4">	9XY0		Skip next instruction if VX != VY</font></p>
+<p><font size="4">	ANNN	I = NNN</font></p>
+<p><font size="4">	BNNN	Jump to NNN + V0</font></p>
+<p><font size="4">	CXKK	VX = Random number AND KK</font></p>
+<p><font size="4">	DXYN	Draws a sprite at (VX,VY) starting at M(I). VF = collision.</font></p>
+<p><font size="4">			If N=0, draws the 16 x 16 sprite, else an 8 x N sprite.</font></p>
+<p><font size="4">	EX9E		Skip next instruction if key VX pressed</font></p>
+<p><font size="4">	EXA1		Skip next instruction if key VX not pressed</font></p>
+<p><font size="4">	FX07		VX = Delay timer</font></p>
+<p><font size="4">	FX0A		Waits a keypress and stores it in VX</font></p>
+<p><font size="4">	FX15		Delay timer = VX</font></p>
+<p><font size="4">	FX18		Sound timer = VX</font></p>
+<p><font size="4">	FX1E		I = I + VX</font></p>
+<p><font size="4">	FX29		I points to the 4 x 5 font sprite of hex char in VX</font></p>
+<p><font size="4">	FX33		Store BCD representation of VX in M(I)...M(I+2)</font></p>
+<p><font size="4">	FX55		Save V0...VX in memory starting at M(I)</font></p>
+<p><font size="4">	FX65		Load V0...VX from memory starting at M(I)</font></p>
+<p><font size="4">	FX75		Save V0...VX (X&lt;8) in the HP48 flags (***)</font></p>
+<p><font size="4">	FX85		Load V0...VX (X&lt;8) from the HP48 flags (***)</font></p>
+<dir>
+<dir>
+
+<p align="justify"><font size="4">(*): Used to be undocumented (but functional) in the original docs.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4"> (**): When you do VX - VY, VF is set
+to the negation of the borrow. This means that if VX is superior or
+equal to VY, VF will be set to 01, as the borrow is 0. If VX is
+inferior to VY, VF is set to 00, as the borrow is 1.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4"> (***):	SCHIP Instruction. Can be used in CHIP8 graphic mode.</font></p>
+
+<p><font size="4">&nbsp;</font></p></dir>
+</dir>
+
+<font size="4"><u><p>NOTES:</p>
+</u>
+</font><p align="justify"><font size="4">As the interpreter is
+emulated, all the 0NNN instructions cannot be implemented. Only 00E0,
+00EE and the SCHIP instructions are available.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">The SCHIP graphic instructions can be
+used in CHIP-8 graphic mode. This, a 4 pixels left or right scrolling
+in SCHIP graphic mode will be interpreted as a TWO PIXELS scroll in
+CHIP-8 mode. Remember that a segment of 4 pixels in 128 x 64 resolution
+has the same size than a 2 pixels one in 64 x 32 resolution.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">Drawing the 16 x 16 pixels SCHIP
+sprite in CHIP-8 mode will display an 8 x 16 sprite (because only the
+first 16 bytes of this sprite will be used). The result is that a 16 x
+16 SCHIP sprite will not be correctly displayed in the 64 x 32
+resolution. However, this instruction allows drawing an 8 x 16 sprite,
+which cannot be performed with the standard CHIP-8 drawing instruction.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">We saw that a pixel of the 64 x 32
+resolution is twice bigger than one of the 128 x 64 one. Another
+consequence of this is that the vertical scrolling instruction is
+different in the 64 x 32 resolution. In this one, it will scroll half
+the lines it would have scrolled in SCHIP mode. Note that if the number
+of lines to scroll is ODD, the scroll will be performed with a
+half-pixel shift !</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<font size="5"><p>        1.6 - Keyboard</p>
+</font><font size="4">
+<p align="justify">Most of the original CHIP-8 programs used a 16 key hex keyboard, which looked like this:</p>
+</font>
+<p align="center"></p><center><table border="1" cellpadding="4" cellspacing="1" width="113">
+<tbody><tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">1</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">2</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">3</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">C</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">4</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">5</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">6</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">D</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">7</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">8</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">9</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">E</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">A</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">0</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">B</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">F</font></p></td>
+</tr>
+</tbody></table>
+</center><p></p>
+
+<font size="4">
+<p>&nbsp;</p>
+<p>This keyboard is emulated like this on the PC (using the keypad):</p>
+</font>
+<p align="center"></p><center><table border="1" cellpadding="4" cellspacing="1" width="113">
+<tbody><tr><td valign="top" width="25%">
+<font size="2"></font><p align="center"><font size="2">Num</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">C</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">D</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">E</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">1</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">2</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">3</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">F</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">4</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">5</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">6</font></p></td>
+<td valign="top" width="25%">&nbsp;</td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">7</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">8</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">9</font></p></td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">B</font></p></td>
+</tr>
+<tr><td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">A</font></p></td>
+<td valign="top" width="25%">&nbsp;</td>
+<td valign="top" width="25%">
+<font size="4"></font><p align="center"><font size="4">0</font></p></td>
+<td valign="top" width="25%">&nbsp;</td>
+</tr>
+</tbody></table>
+</center><p></p>
+
+<font size="4">
+<p>	To switch between the VIDEO and the LCD mode, press V.</p>
+<p>	To perform a SNAPSHOT, press Tab.</p>
+<p>	To reset CHIP8, press BACKSPACE.</p>
+<p>	To capture the screen, press C.</p>
+<p>	To turn sound ON/OFF, press S.</p>
+<p>	To quit CHIP8, press Esc.</p>
+<p>	To make a pause, press P.</p>
+
+</font><font size="5"><p>	1.7 - CHIP8/SCHIP games and programs</p>
+</font><font size="4">
+<p align="justify">The list of CHIP-8 and SCHIP programs has been
+removed, due to their increasing quantity. The file called GAMES.TXT
+contains the descriptions of all the programs given with this emulator.
+If you want to add new games to the emulator, send them via Email.</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</font><font size="5"><p>2 - The CHIP8 emulator</p>
+</font><font size="4">
+</font><font size="5"><p>	2.1 - CHIP8 configuration</p>
+</font><font size="4">
+<p>The SETUP utility allows you to configure CHIP8. You can:</p>
+<p>	Choose the type of display (TEXT or VGA),</p>
+<p>	Enable or disable the beeper by default,</p>
+<p>	Enable or disable the sound while loading a program,</p>
+<p>	Change the colour of the screen border,</p>
+<p>	Change the colours of the "black" and "white" pixels.</p>
+
+<p align="justify">To configure CHIP8, run SETUP. Use the direction
+keys to configure the emulator: the vertical directions select the
+parameter to modify, and the horizontal directions modifies it. To save
+the configuration, press ENTER on 'SAVE CONFIG'. The configuration is
+saved in the CHIP8.INI file.</p>
+<p align="justify">Note that the VGA mode can provide two display
+modes: LCD, which draws the pixels like those of an old LCD screen, and
+VIDEO which draws them normally.</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</font><font size="5"><p>	2.2 - Using CHIP8</p>
+</font><font size="4">
+</font><p align="justify"><font size="4">If you run CHIP8 with no argument, the emulator runs BOOT-128.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">BOOT-128 is a small 128 bytes program
+(99% in CHIP-8) placed in 100-180. It allows you to type a hexadecimal
+CHIP-8 program. Don't forget that this program uses the original CHIP-8
+keyboard, so you may have some confusions with the PC keyboard...</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">BOOT-128 is accessible by performing
+a jump in 100. Note that BOOT-128 is not the original CHIP-8 boot
+(which is written in 1802 machine code).</font></p>
+<p align="justify"><font size="4">To run the program you typed using
+BOOT-128, RESET the emulator by pressing Backspace. Note that BOOT-128
+doesn't allow you to make corrections if you typed an incorrect code.</font></p>
+
+<p align="justify"><font size="4">To run a CHIP-8 program, type </font><b><font face="Courier New" size="4">CHIP8 Program_Name</font></b><font size="4">.
+You can specify the path of the program. The emulator loads it (an
+error message will appear if it is not found). Once loaded, the
+emulation starts.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">Programs for the ETI-660 computer used to be located in 600-FFF. To make them usable by the emulator, type </font><b><font face="Courier New" size="4">CHIP8 Program_Name 600</font></b><font size="4">.</font></p>
+
+<p align="justify"><font size="4">You can perform a text screen capture
+by pressing C. This capture will be saved in a file called SCREEN.
+Refer to section 1.6 for the keys. This is only available in CHIP-8
+mode.</font></p>
+
+<p align="justify"><font size="4">Concerning the VGA display, you can put the display mode in VIDEO or in VGA whenever you want by pressing V.</font></p>
+
+<p align="justify"><font size="4">You can also make a SNAPSHOT of the
+current emulation by pressing Tab. By default, SNAPSHOTs are saved in a
+file called SNAPSHOT, which can be renamed. SNAPSHOTS are images
+containing the entire status of the emulator. They allow you to save
+the emulation status, do whatever you want (for example quit the
+emulator), and then continue the saved emulation.</font></p>
+<p align="justify"><font size="4">SNAPSHOTs are usable by typing </font><b><font face="Courier New" size="4">CHIP8 -s SnapshotName</font></b><font size="4">.</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<font size="5"><p>	2.3 - The FIX_CHIP utility</p>
+</font><font size="4">
+</font><p align="justify"><font size="4">On the HP48, CHIP-8 programs
+are stored as strings, which are special objects. If you transfer a
+program and try to run it under CHIP8, it will never run, because it
+has to be converted to the PC format with FIX_CHIP.</font></p>
+<p align="justify"><font size="4">To do this, type </font><b><font face="Courier New" size="4">FIX_CHIP SourceName TargetName</font></b><font size="4">.</font></p>
+<p align="justify"><font size="4">Note that lots of games given with the emulator are imported from HP48.</font></p>
+<p align="justify"><font size="4">As far as I know, the only original CHIP-8 games are KALEID, TANK, UFO (dated 1977), and WIPEOFF.</font></p>
+<font size="5">
+<p>	2.4 - The UNCHIP disassembler</p>
+</font><font size="4">
+</font><p align="justify"><font size="4">UNCHIP is a little
+CHIP-8/SCHIP disassembler made to help you in programming games, making
+changes in some programs (bugs, improvements...).</font></p>
+<p align="justify"><font size="4">To use it, type </font><b><font face="Courier New" size="4">UNCHIP SourceName TargetName</font></b><font size="4">. <b>SourceName</b> is the name of the program you want to disassemble, <b>TargetName</b>
+is the name of the source you will obtain. If you want to see the
+contents of a SNAPSHOT file, UNCHIP will not disassemble it as a
+program, but will give you the data of the snapshot. To do this, type </font><b><font face="Courier New" size="4">UNCHIP -s SourceName TargetName</font></b><font size="4">.</font></p>
+
+<p><font size="4">UNCHIP can also take two optional arguments: -l and -o.</font></p>
+<dir>
+<dir>
+
+<b><font face="Courier New" size="4"></font></b><p align="justify"><b><font face="Courier New" size="4">-l</font></b><font size="4">
+is used to keep all the instructions addresses (else, only those where
+CHIP8 makes jumps, sub-routine calls, or a reference for register I are
+kept).</font></p>
+
+<b><font face="Courier New" size="4"></font></b><p><b><font face="Courier New" size="4">-o</font></b><font size="4"> is used to keep the OPCs (CHIP8 hexadecimal instructions).</font></p>
+</dir>
+</dir>
+
+<p><font size="4">You can combine these arguments as you wish:</font></p>
+
+<p><font size="4">	UNCHIP PONG PONG.SRC -L -O</font></p>
+<p><font size="4">	UNCHIP TETRIS TETRIS.SRC -O</font></p>
+<p><font size="4">	UNCHIP UFO UFO.SRC -O -L</font></p>
+<p><font size="4">	...</font></p>
+
+<p><font size="4">&nbsp;</font></p>
+<p><font size="4">&nbsp;</font></p>
+<font size="5"><p>	2.5 - The BINHEX and HEXBIN utilities</p>
+</font><font size="4">
+</font><p align="justify"><font size="4">These two programs are made to
+simplify the programmer's life in programming CHIP-8 games. They allow
+converting binary files into hexadecimal files (BINHEX), and
+hexadecimal files into binary files (HEXBIN). Both require two
+arguments: the names of the source and the target.</font></p>
+<p align="justify"><font size="4">For example, to convert PONG in a hexadecimal file named PONG.TXT, type </font><b><font face="Courier New" size="4">BINHEX PONG PONG.TXT</font></b><font size="4">. To convert PONG.TXT in a binary file, type </font><b><font face="Courier New" size="4">HEXBIN PONG.TXT PONG</font></b><font size="4">.</font></p>
+<p align="justify"></p>
+<p align="justify"><font size="4">These utilities are very useful to
+make corrections or improvements in CHIP-8 programs. Instead of using
+UNCHIP and reassembling everything, just convert the file in
+hexadecimal, modify it, and re-convert it to binary. This is the way I
+used to improve PONG in less than 3 minutes.</font></p>
+<p align="justify"><font size="4">Note that BINHEX accepts comments, so
+you can add some text to your file if you put the ';' character before
+them. Everything placed after this character will be ignored.</font></p>
+<p align="justify"></p>
+<font size="4"><u><p align="justify">&nbsp;</p>
+<p align="justify">Little astute:</p>
+</u><p align="justify"></p>
+<p align="justify">If you want to add several instructions somewhere in a program WITHOUT having to change all the jump instructions:</p>
+<p align="justify"></p>
+<p align="justify">1. Replace the instruction where you want to put several ones by a call to a subroutine placed at the end of the program.</p>
+<p align="justify"></p>
+<p align="justify">2. Program the subroutine. Pay an important
+attention to the registers it modifies. All the registers must not be
+altered once the subroutine will have executed. Save them if needed.</p>
+<p align="justify"></p>
+<p align="justify">3. Place at the end of subroutine the instruction
+which was replaced by the call to the subroutine, and put a RETURN
+instruction.</p>
+
+<p align="justify">This astute cannot be used everywhere. For instance,
+you cannot use it if your subroutine modifies register I. If the sound
+timer is currently used, the beeper will only stop beeping earlier than
+before, because of the time taken by the execution of the subroutine...</p>
+<p align="justify"></p>
+<p align="justify">&nbsp;</p>
+<p align="justify">&nbsp;</p>
+</font><font size="5"><p align="justify">	2.6 - The CHIPPER assembler</p>
+</font><font size="4">
+<p align="justify">CHIPPER is a powerful symbolic CHIP-8 (as well as
+CHIP48 and SCHIP) assembler written by Christian Egeberg. A complete
+documentation is given in the directory of this program. Don't forget
+to put <b>OPTION BINARY</b> at the beginning of your sources, or your programs won't be usable on your PC. You can also put <b>ALIGN OFF</b>
+to save some space. This option allows putting some 8-bit data, instead
+of 16 bit. If you don't put this option, any 8-bit data will be
+converted to 16-bit data.</p>
+
+</font><font size="5"><p>3 - Contacts</p>
+</font><font size="4">
+<p>If you want to contact me, send an Email to the following address:</p>
+<p align="center">winter@worldnet.net</p>
+
+<p align="justify">I will answer your questions in the time I have to, and take the time to appreciate your suggestions.</p>
+
+<p>I personally thank the following people&nbsp;:</p>
+
+<p align="justify">Andreas Gustafsson, author of CHIP48 for the HP48, for his great detailed docs of CHIP-8.</p>
+<p align="justify"></p>
+<p align="justify">Erik Bryntse, author of SCHIP, for the HP48, for his SCHIP docs.</p>
+<p align="justify"></p>
+<p align="justify">Carolyn (alias "Steve"), for her encouragements and patience.</p>
+<p align="justify"></p>
+<p align="justify">Massimiliano Zattera, for his keyboard routine which allows to make a real emulation of the original Chip-8 keyboard.</p>
+<p align="justify"></p>
+<p align="justify">Woodrow Hinkleman, for providing help with a real COSMAC VIP computer, and for providing original CHIP-8 and ROM listings.</p>
+
+</font><font size="5"><p>4 - POSTWARE</p>
+</font><font size="4">
+<p align="justify">This software is released as a POSTWARE. A POSTWARE
+is like a FREEWARE, except that you have to send an email to the author
+if you decide to use this software. The minimum you have say is who you
+are. You can also add something else like what you think about this
+emulator, how much you use it, your own appreciations and suggestions,
+etc.</p>
+
+<p>&nbsp;</p>
+<p>The rules of the FREEWARE means that:</p>
+
+<p>You MUST obtain your copy <b>FREELY</b>.</p>
+
+<p align="justify">You can give it <b>ONLY IN ITS ORIGINAL INTEGRITY</b>: you <b>MUST NOT ADD, ERASE, or MODIFY</b> any of its files (the games are only added to the software as I did not program all of them).</p>
+
+<p>You <b>MUST NOT SELL</b> it</p>
+
+<p>You MUST NOT distribute it for any charge excepted:</p>
+<p>	The shipping charges,</p>
+<p>	The price of the media (diskette, tape...) of THE copy you GIVE.</p>
+
+<p align="justify">If you require some money to distribute it, you MUST obtain my <b>express written permission</b>.</p>
+
+<p align="justify">This software may be distributed on CDROM, diskette, tape or free server ONLY if it agrees with this <b>entire</b> section.</p>
+<p align="justify"></p>
+<p align="justify">[Document last revised 22 NOV 1998]</p></font></body></html>

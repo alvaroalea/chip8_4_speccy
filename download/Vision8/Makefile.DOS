@@ -1,0 +1,22 @@
+# Makefile for Vision-8 MS-DOS
+# Configured for Borland C++
+
+CFLAGS = -w -O1 -ms
+
+OBJECTS = msdos.obj chip8.obj c8debug.obj
+
+all: v8.exe
+
+clean:
+	del *.obj
+
+v8.exe: $(OBJECTS)
+	$(CC) $(CFLAGS) -lm -ls $(OBJECTS)
+	move msdos.exe v8.exe
+
+msdos.obj: msdos.c chip8.h
+
+chip8.obj: chip8.c chip8.h
+
+c8debug.obj: c8debug.c chip8.h
+

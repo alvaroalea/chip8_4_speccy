@@ -1,0 +1,10 @@
+
+IF !DEFINED_NEED1bitsound 
+	defc	DEFINED_NEED1bitsound  = 1
+ENDIF
+
+
+IF !NEED_floatpack
+	DEFINE	NEED_floatpack
+ENDIF
+

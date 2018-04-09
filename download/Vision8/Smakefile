@@ -1,0 +1,26 @@
+# Makefile for Vision-8 Amiga and Vision-8 AmiWin.
+# CHIP8 can't be schedule optimized, as SAS/C then generates broken code.
+# All options are set in the file "SCOPTIONS".
+
+all: v8 v8.AmiWin
+
+clean:
+	Delete *.o *.lnk
+
+v8: Amiga.o CHIP8.o C8Debug.o
+	sc LINK Amiga.o CHIP8.o C8Debug.o TO v8
+
+v8.AmiWin: X.o CHIP8.o C8Debug.o
+	sc LINK X.o CHIP8.o C8Debug.o TO v8.AmiWin
+
+Amiga.o: Amiga.c CHIP8.h
+	sc Amiga.c
+
+X.o: X.c CHIP8.h
+	sc X.c
+
+CHIP8.o: CHIP8.c CHIP8.h
+	sc NOOPTSCHEDULE CHIP8.c
+
+C8Debug.o: C8Debug.c CHIP8.h
+	sc C8Debug.c

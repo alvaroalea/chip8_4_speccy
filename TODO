@@ -1,0 +1,31 @@
+Bugfixes:
+=========
+El juego de Merlin no redibuja bien en fullscreen.
+	    Blinky tampoco.
+
+DONE tic tac toe y syzgy tampoco va fino (ldr y str no cambian I).
+DONE tetris y otros fallan
+DONE por alguna razon la 5º instruccion se lee incorrectamente despues de un varios ld v(x),nn
+DONE se corrompe el 3º nibble(los signed pueden devolver mas tamaño que sizeof)
+
+Mejoras:
+========
+
+- Teclado Redefinible.
+
+DONE Ventana de debug.
+	Implementar breakpoints.
+
+- Version para PC.
+
+- Optimizacion de la rutina de Sprites
+
+- Version SCHIP8
+
+- ArtWork, pantalla de carga, caratula
+
+DONE Pagina Web
+
+- Publicidad
+
+

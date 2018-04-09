@@ -1,0 +1,30 @@
+# Makefile for Vision-8 ADAM
+
+CC = c
+CFLAGS = -C -V
+OPTFLAGS = $(CFLAGS) -O
+
+OBJECTS = MSX1.obj VDP.obj CHIP8.obj C8Debug.obj HiTech.obj
+
+%.obj : %.c
+	$(CC) $(CFLAGS) $<
+
+all: v8.com
+
+v8.com: $(OBJECTS)
+	c -V -Mv8.map $(OBJECTS)
+	ren MSX1.com v8.com
+
+MSX1.obj: MSX1.c CHIP8.h VDP.h
+
+VDP.obj: VDP.c VDP.h
+
+CHIP8.obj: CHIP8.c CHIP8.h
+	$(CC) $(OPTFLAGS) CHIP8.c
+
+C8Debug.obj: C8Debug.c CHIP8.h
+
+HiTech.obj: HiTech.c
+
+clean:
+	rm -f $(OBJECTS)

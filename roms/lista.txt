@@ -1,0 +1,47 @@
+* 15PUZZLE
+* Airplane
+* BLINKY
+* BLITZ
+* BREAKOUT
+* BRIX
+* c8pic
+*  cave
+* CONNECT4
+  FRONTON ?
+  FILTER
+  figures
+* GUESS
+* HIDDEN
+* ibm
+* INVADERS
+  landing
+* KALEID
+  matches
+* MAZE
+* MERLIN
+* MISSILE
+  PADDLES
+* PONG
+  PONG (1P)
+* PONG2
+* PONG2 (otro campo) 
+* PUZZLE
+  rocket launcher
+  rocket2
+  SQUASH
+  soocer
+  space flight
+* SYZYGY
+  scr_test
+* TANK
+  tapeworn
+* TETRIS
+* TICTAC
+  timebomb
+  tron
+* UFO
+* VBRIX
+* VERS
+  WALL
+* WIPEOFF
+  x-mirror
